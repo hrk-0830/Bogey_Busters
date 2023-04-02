@@ -1,25 +1,12 @@
-# README
+サイト名：　Bogey Busters
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+・サイト概要
 
-Things you may want to cover:
+・サイトのテーマ：自分がラウンドしたコースや練習場のレビューを投稿し、それにいいねやコメントができるレビューサイト
+テーマを選んだ理由：昨今、新型コロナウイルスの影響で大学生などの若者のゴルフブームが来ています。
+しかし、ゴルフ初心者にはゴルフ場の良し悪しや難易度を調べるのが少し困難いなります。なので、一目で
+ゴルフ場の情報がわかるサイトがあれば便利だと考えこのテーマにしました。
 
-* Ruby version
+・ターゲットユーザー：ゴルフ好きの老若男女
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-# Bogey_Busters
+・主な利用シーン：ゴルフ場のレビューや初心者同士でラウンドをする際のゴルフ場を探す時
