@@ -1,29 +1,27 @@
 Rails.application.routes.draw do
+
+  devise_for :admins, controllers: {
+    sessions: 'admin/sessions',
+  }
+  devise_for :customers, controllers: {
+    sessions: 'public/sessions',
+    registrations: 'public/registrations'
+  }
+
   namespace :admin do
-    get 'posts/index'
-    get 'posts/show'
-    get 'posts/edit'
+    resources :customers, only: [:index, :show, :edit, :update]
+    resources :posts, only: [:index, :show, :edit, :update, :destroy]
   end
-  namespace :admin do
-    get 'users/index'
-    get 'users/show'
-    get 'users/edit'
-  end
+
   namespace :public do
-    get 'homes/top'
+    resources :customers, only: [:index, :show, :edit, :update]
+    get '/customers/unsubscribe' => 'customers#unsubscribe', as: 'unsubscribe'
+    patch '/customers/withdraw' => 'customers#withdraw', as: 'withdraw'
+    resources :posts, only: [:index, :show, :edit, :create, :update, :destroy]
+    resources :favorites, only: [:create, :destroy]
+    resources :post_comments, only: [:create, :destroy]
+    post '/tags/information' => 'tags#create', as: 'create_tag'
   end
-  namespace :public do
-    get 'posts/new'
-    get 'posts/index'
-    get 'posts/show'
-    get 'posts/edit'
-  end
-  namespace :public do
-    get 'users/show'
-    get 'users/edit'
-    get 'users/index'
-  end
-  devise_for :admins
-  devise_for :customers
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+
+  root to: 'public/homes#top'
 end

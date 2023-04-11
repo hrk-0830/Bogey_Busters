@@ -1,2 +1,29 @@
-<h1>Public::Homes#top</h1>
-<p>Find me in app/views/public/homes/top.html.erb</p>
+<div class ="container">
+  <div class ="row">
+
+    <div class ="col-md-4">
+      <div>
+        <p　class ="m-5">
+          Bogey Bustersへようこそ　</br>
+          お気に入りのコースを見つけて　</br>
+          ベストスコアを目指しましょう
+        </p>
+      </div>
+    </div>
+
+    <% @posts.take(12).each do |posts| %>
+    <div class ="col-md-8">
+      <div class="card">
+        <%= link_to item_path(item) do %>
+          <%= image_tag posts.image, size: "190x150" ,class: "card-img-top" %>
+        <% end %>
+        <div class="card-body">
+          <h5 class="card-title"><%= posts.golf_corse %></h5>
+          <p class="card-text"><%= posts.star %></p>
+        </div>
+      </div>
+    </div>
+    <% end %>
+
+  </div>
+</div>
