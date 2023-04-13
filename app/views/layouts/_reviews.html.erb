@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    <% @posts.each do |post| %>
+      <div class="col">
+        <div class="card h-100">
+          <div class="card-img-top position-relative">
+            <%= link_to public_post_path(post) do %>
+              <% if post.image.attached? %>
+                <%= image_tag post.image, class: "card-img-top rounded-3" %>
+              <% else %>
+                <%= image_tag 'no_image.jpg', class: "card-img-top rounded-3" %>
+              <% end %>
+            <% end %>
+            <% if post.star? %>
+              <div class="position-absolute top-0 start-0">
+                <% for i in 1..post.star do %>
+                  <i class="fas fa-star text-warning"></i>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title"><%= post.golf_course %></h5>
+            <p class="card-text"><%= post.difficulty_status_i18n %></p>
+            <p class="card-text"><%= post.prefecture_status_i18n %></p>
+            <p class="card-text"><%= post.review.truncate(50) %></p>
+            <%= link_to "詳細をみる", public_post_path(post) %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<%= paginate @posts %>

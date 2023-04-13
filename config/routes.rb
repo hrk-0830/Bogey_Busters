@@ -17,7 +17,7 @@ Rails.application.routes.draw do
     resources :customers, only: [:index, :show, :edit, :update]
     get '/customers/unsubscribe' => 'customers#unsubscribe', as: 'unsubscribe'
     patch '/customers/withdraw' => 'customers#withdraw', as: 'withdraw'
-    resources :posts, only: [:index, :show, :edit, :create, :update, :destroy]
+    resources :posts, only: [:index, :new, :show, :edit, :create, :update, :destroy]
     resources :favorites, only: [:create, :destroy]
     resources :post_comments, only: [:create, :destroy]
     post '/tags/information' => 'tags#create', as: 'create_tag'

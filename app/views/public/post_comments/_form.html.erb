@@ -1,0 +1,7 @@
+<%= form_with model: post_comment, url: public_post_comments_path, local: false do |f| %>
+  <div class="form-group">
+    <%= f.label :comment %>
+    <%= f.text_area :comment, rows:'5',placeholder: "コメントをここに", class: "form-control" %>
+  </div>
+  <%= f.submit "送信する", class: "btn btn-lg btn-primary float-right mt-3" %>
+<% end %>

@@ -1,2 +1,65 @@
-<h1>Public::Posts#new</h1>
-<p>Find me in app/views/public/posts/new.html.erb</p>
+<div class="container my-4">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <h2 class="text-center mb-4">口コミ投稿</h2>
+      <%= form_with model: @post, url: public_posts_path, local: true do |f| %>
+        <div class="form-group">
+          <%= f.label :image, "ゴルフ場画像" %>
+          <%= f.file_field :image, accept: "image/*", class: "form-control-file" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :golf_course, "ゴルフ場名" %>
+          <%= f.text_field :golf_course, class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :title, "タイトル" %>
+          <%= f.text_field :title, class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :review, 'レビュー' %>
+          <%= f.text_area :review, class: "form-control" %>
+        </div>
+
+        <!--タグ機能-->
+
+        <div class="form-group">
+          <label for="star-rating">総合評価</label>
+          <div class="btn-group btn-group-toggle" data-toggle="buttons">
+            <label class="btn btn-outline-secondary">
+              <input type="radio" name="post[star]" value="1">⭐️
+            </label>
+            <label class="btn btn-outline-secondary">
+              <input type="radio" name="post[star]" value="2">⭐️
+            </label>
+            <label class="btn btn-outline-secondary">
+              <input type="radio" name="post[star]" value="3">⭐️
+            </label>
+            <label class="btn btn-outline-secondary">
+              <input type="radio" name="post[star]" value="4">⭐️
+            </label>
+            <label class="btn btn-outline-secondary">
+              <input type="radio" name="post[star]" value="5">⭐️
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :prefecture_status, "所在地" %>
+          <%= f.select :prefecture_status, options_for_select(Post.prefecture_statuses_i18n.invert, selected: @post.prefecture_status), {}, class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :difficulty_status, "難易度" %>
+          <%= f.select :difficulty_status, options_for_select(Post.difficulty_statuses_i18n.invert, selected: @post.difficulty_status), {}, class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.submit "投稿する", class: "btn btn-primary btn-block" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

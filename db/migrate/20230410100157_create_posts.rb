@@ -8,7 +8,7 @@ class CreatePosts < ActiveRecord::Migration[6.1]
       t.integer :prefecture_status, default: 0, null: false
       t.integer :difficulty_status, default: 0, null: false
       t.text :review, null: false
-      t.string :star, null: false
+      t.integer :star, null: false
 
       t.timestamps
     end

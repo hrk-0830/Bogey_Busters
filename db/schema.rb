@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_04_10_115202) do
+ActiveRecord::Schema.define(version: 2023_04_12_133639) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -58,7 +58,6 @@ ActiveRecord::Schema.define(version: 2023_04_10_115202) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.string "name", null: false
     t.string "introduction"
     t.integer "best_score"
     t.integer "residence_status", default: 0
@@ -67,6 +66,7 @@ ActiveRecord::Schema.define(version: 2023_04_10_115202) do
     t.boolean "is_deleted", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "name"
     t.index ["email"], name: "index_customers_on_email", unique: true
     t.index ["reset_password_token"], name: "index_customers_on_reset_password_token", unique: true
   end
@@ -87,15 +87,15 @@ ActiveRecord::Schema.define(version: 2023_04_10_115202) do
   end
 
   create_table "posts", force: :cascade do |t|
-    t.integer "customer_id", null: false
     t.string "golf_course", null: false
     t.string "title", null: false
     t.integer "prefecture_status", default: 0, null: false
     t.integer "difficulty_status", default: 0, null: false
     t.text "review", null: false
-    t.string "star", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "star"
+    t.integer "customer_id"
   end
 
   create_table "relationships", force: :cascade do |t|
