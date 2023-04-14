@@ -29,11 +29,11 @@ class Public::PostsController < ApplicationController
 
   def update
     @post = Post.find(params[:id])
-    if @post.update
-      redirect_to public_post_path(@post)
+    if @post.update(post_params)
+      redirect_to public_posts_path
     else
       flash[:danger] = "必要情報を入力してください"
-      redirect_to edit_public_post_path
+      redirect_to public_posts_path
     end
   end
 

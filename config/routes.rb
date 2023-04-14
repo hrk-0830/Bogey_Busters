@@ -14,12 +14,17 @@ Rails.application.routes.draw do
   end
 
   namespace :public do
-    resources :customers, only: [:index, :show, :edit, :update]
-    get '/customers/unsubscribe' => 'customers#unsubscribe', as: 'unsubscribe'
-    patch '/customers/withdraw' => 'customers#withdraw', as: 'withdraw'
-    resources :posts, only: [:index, :new, :show, :edit, :create, :update, :destroy]
-    resources :favorites, only: [:create, :destroy]
-    resources :post_comments, only: [:create, :destroy]
+    resources :customers, only: [:index, :show, :edit, :update] do
+      get '/customers/unsubscribe' => 'customers#unsubscribe'
+      patch '/customers/withdraw' => 'customers#withdraw'
+      resource :relationships, only: [:create, :destroy]
+      get :followings, on: :member
+      get :followers, on: :member
+    end
+    resources :posts, only: [:index, :new, :show, :edit, :create, :update, :destroy] do
+      resource :favorites, only: [:create, :destroy]
+      resources :post_comments, only: [:create, :destroy]
+    end
     post '/tags/information' => 'tags#create', as: 'create_tag'
   end
 

@@ -1,16 +1,17 @@
 class Public::PostCommentsController < ApplicationController
-  
+
   def create
     @post = Post.find(params[:post_id])
-    @comment = current_user.post_comment.new(post_comment_params)
-    @comment.post_id = @post.id
-    @comment.save
+    @post_comment = current_customer.post_comments.build(post_comment_params)
+    @post_comment.post_id = @post.id
+    @post_comment.save
     render :comments
   end
 
+
   def destroy
-    @book = Book.find(params[:book_id])
-    BookComment.find(params[:id]).destroy
+    @post = Post.find(params[:post_id])
+    PostComment.find(params[:id]).destroy
     render :comments
   end
 
@@ -19,6 +20,6 @@ class Public::PostCommentsController < ApplicationController
   private
 
   def post_comment_params
-    params.require(:post_comment).permit(:comment)
+    params.require(:post_comment).permit(:comment, :customer_id, :post_id)
   end
 end

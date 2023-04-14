@@ -10,7 +10,7 @@
     <% post.each do |post| %>
     <tr>
       <td>
-        <%= link_to public_customer_path(post.post_comment.customer) do %>
+        <%= link_to public_post_post_comment_path(post.post_comment.customer) do %>
 
           <%= post.post_comment.customer.name %>
         <% end %>

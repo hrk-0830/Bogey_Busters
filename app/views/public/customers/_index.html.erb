@@ -1,0 +1,36 @@
+<table class='table'>
+  <thead>
+    <tr>
+      <th>プロフィール画像</th>
+      <th>名前</th>
+      <th>フォロー</th>
+      <th>フォロワー</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% customers.each do |customer| %>
+      <tr>
+        <td><%= image_tag customer.get_profile_image, size: '50x50', class: 'rounded-circle' %></td>
+        <td><%= customer.name %></td>
+        <td><%= customer.followings.count %></td>
+        <td><%= customer.followers.count %></td>
+        <td>
+          <% if customer != current_customer %>
+            <% if customer.is_followed_by?(current_customer) %>
+              <%= link_to public_customer_relationships(customer.id), method: :delete, class: 'btn btn-danger' do %>
+                フォロー解除
+              <% end %>
+            <% else %>
+              <%= link_to public_customer_relationships(customer.id), method: :post, class: 'btn btn-primary' do %>
+                フォロー
+              <% end %>
+            <% end %>
+          <% end %>
+        </td>
+        <td><%= link_to 'Show', customer, class: "customer_#{customer.id} btn btn-secondary" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

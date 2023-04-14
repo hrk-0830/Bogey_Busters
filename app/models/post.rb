@@ -5,6 +5,7 @@ class Post < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :tags, through: :tag_lists
   has_many :tag_lists, dependent: :destroy
+  has_many :post_comments, dependent: :destroy
 
   def favorited?(customer)
    favorites.exists?(customer_id: customer.id)

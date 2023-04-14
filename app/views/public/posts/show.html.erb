@@ -66,8 +66,32 @@
       <%= render "public/post_comments/form", post: @post, post_comment: @post_comment %>
     </div>
     <div class ="col-md-6">
-      <%= render "public/post_comments/index", post: @post %>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>User</th>
+            <th>Comment</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @post.post_comments.each do |post_comment| %>
+          <tr>
+            <td>
+              <%= link_to public_customer_path(post_comment.customer) do %>
+                <%= post_comment.customer.name %>
+              <% end %>
+            </td>
+            <td><%= post_comment.comment %></td>
+            <td>
+              <% if post_comment.customer == current_customer %>
+                <%= link_to "削除", public_post_post_comment_path(@post, post_comment), method: :delete, remote: true, class: "btn btn-danger pull-right" %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
     </div>
   </div>
-
 </div>
