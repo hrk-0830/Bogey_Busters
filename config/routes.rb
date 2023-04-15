@@ -9,10 +9,17 @@ Rails.application.routes.draw do
   }
 
   namespace :admin do
-    resources :customers, only: [:index, :show, :edit, :update]
-    resources :posts, only: [:index, :show, :edit, :update, :destroy]
+    resources :customers, only: [:index, :show, :edit, :update] do
+      get '/customers/unsubscribe' => 'customers#unsubscribe'
+      patch '/customers/withdraw' => 'customers#withdraw'
+    end
+    resources :posts, only: [:index, :show, :edit, :update, :destroy] do
+      resources :post_comments, only: [:destroy]
+    end
   end
-
+  
+  root to: 'public/homes#top'
+  
   namespace :public do
     resources :customers, only: [:index, :show, :edit, :update] do
       get '/customers/unsubscribe' => 'customers#unsubscribe'
@@ -25,8 +32,7 @@ Rails.application.routes.draw do
       resource :favorites, only: [:create, :destroy]
       resources :post_comments, only: [:create, :destroy]
     end
-    resources :tags, only: [:show, :create]
+    resources :tags, only: [:index, :show]
   end
 
-  root to: 'public/homes#top'
 end

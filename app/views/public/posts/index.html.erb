@@ -1,4 +1,12 @@
 <div class ="container">
-  <!--検索バーの部分テンプレート-->
+  <div class ="row">
+    <div class ="col-md-4">
+      <%= link_to "投稿する", new_public_post_path, class: "btn btn-primary btn-block" %>
+    </div>
+    <div class ="col-md-4"></div>
+    <div class ="col-md-4">
+      <!--検索バーの部分テンプレート-->
+    </div>
+  </div>
   <%= render 'layouts/reviews', posts: @posts %>
 </div>

@@ -1,2 +1,30 @@
-<h1>Admin::Customers#index</h1>
-<p>Find me in app/views/admin/customers/index.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>プロフィール画像</th>
+            <th>名前</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if @customers.present? %>
+            <% @customers.each do |customer| %>
+              <tr>
+                <td><%= image_tag customer.get_profile_image, size: '50x50' %></td>
+                <td><%= customer.name %></td>
+                <td><%= link_to "ユーザー詳細", admin_customer_path(customer), class: "btn btn-primary" %></td>
+              </tr>
+            <% end %>
+          <% else %>
+            <tr>
+              <td colspan="2">ユーザーがいません</td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

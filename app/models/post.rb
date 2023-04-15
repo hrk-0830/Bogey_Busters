@@ -7,6 +7,13 @@ class Post < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :post_comments, dependent: :destroy
 
+  validates :golf_course, presence: true
+  validates :title, presence: true
+  validates :prefecture_status, presence: true
+  validates :difficulty_status, presence: true
+  validates :review, presence: true
+  validates :star, presence: true
+
   def favorited?(customer)
    favorites.exists?(customer_id: customer.id)
   end

@@ -23,7 +23,10 @@
           <%= f.text_area :review, class: "form-control" %>
         </div>
 
-        <!--タグ機能-->
+        <div class="form-group">
+          <%= f.label :tag, "タグ" %>
+          <%= f.text_field :tag, value: f.object.tags.pluck(:name).join(" "), class: "form-control", placeholder: "複数指定する場合はスペースで区切ってください" %>
+        </div>
 
         <div class="form-group">
           <label for="star-rating">総合評価</label>

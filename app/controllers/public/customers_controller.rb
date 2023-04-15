@@ -1,4 +1,6 @@
 class Public::CustomersController < ApplicationController
+  before_action :authenticate_customer!
+
   def show
     @customer = Customer.find(params[:id])
     @post = @customer.posts
@@ -6,9 +8,6 @@ class Public::CustomersController < ApplicationController
 
   def edit
     @customer = current_customer
-     unless @customer == current_customer
-      redirect_to  customer_path
-     end
   end
 
   def update
@@ -19,7 +18,7 @@ class Public::CustomersController < ApplicationController
       render :edit
     end
   end
-  
+
   def followings
     @customer = Customer.find(params[:id])
     @customers = @customer.followings

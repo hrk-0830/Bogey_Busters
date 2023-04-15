@@ -3,6 +3,9 @@ class Customer < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+
+  has_one_attached :profile_image
+
   has_many :posts, dependent: :destroy
   has_many :post_comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
@@ -12,8 +15,13 @@ class Customer < ApplicationRecord
   has_many :reverse_of_relationships, class_name: 'Relationship', foreign_key: :follower_id
   has_many :followers, through: :reverse_of_relationships, source: :following
 
-  def is_followed_by?(user)
+
+  def is_followed_by?(customer)
     reverse_of_relationships.find_by(following_id: customer.id).present?
+  end
+
+  def active_for_authentication?
+    super && (is_deleted == false)
   end
 
   enum residence_status: {

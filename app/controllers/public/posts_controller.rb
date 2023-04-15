@@ -1,11 +1,14 @@
 class Public::PostsController < ApplicationController
+  before_action :authenticate_customer!
+
   def new
     @post = Post.new
   end
 
   def create
     @post = Post.new(post_params)
-    if @post.save
+    @post.customer_id = current_customer.id
+    if @post.save!
       # タグの保存
       @post.save_tags(params[:post][:tag])
       redirect_to public_post_path(@post.id)
@@ -35,18 +38,24 @@ class Public::PostsController < ApplicationController
       # タグの更新
       @post.save_tags(params[:post][:tag])
       # 成功したら投稿記事へリダイレクト
-      redirect_to post_path(@post)
+      redirect_to public_post_path(@post)
     else
       flash[:danger] = "必要情報を入力してください"
-      redirect_to public_posts_path
+      redirect_to edit_public_post_path(@post)
     end
+  end
+
+  def destroy
+    @post = Post.find(params[:id])
+    @post.destroy
+    redirect_to public_posts_path
   end
 
 
   private
 
   def post_params
-    params.require(:post).permit(:golf_course, :title, :prefecture_status, :difficulty_status, :review, :star, :customer_id, :image, :tag_id)
+    params.require(:post).permit(:golf_course, :title, :prefecture_status, :difficulty_status, :review, :star, :customer_id, :image)
   end
 
 end
