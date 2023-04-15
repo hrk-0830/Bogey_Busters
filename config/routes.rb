@@ -25,7 +25,7 @@ Rails.application.routes.draw do
       resource :favorites, only: [:create, :destroy]
       resources :post_comments, only: [:create, :destroy]
     end
-    post '/tags/information' => 'tags#create', as: 'create_tag'
+    resources :tags, only: [:show, :create]
   end
 
   root to: 'public/homes#top'

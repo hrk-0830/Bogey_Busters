@@ -42,7 +42,11 @@
     <div class="col-md-8">
       <%= @post.review %>
     </div>
-    <div class="col-md-4"></div>
+    <div class="col-md-4">
+      <% @post.tags.each do |tag| %>
+        <%= link_to tag.name, tag_path(tag) %>
+      <% end %>
+    </div>
   </div>
 
   <div class ="row">
