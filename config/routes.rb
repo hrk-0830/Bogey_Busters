@@ -13,13 +13,15 @@ Rails.application.routes.draw do
       get '/customers/unsubscribe' => 'customers#unsubscribe'
       patch '/customers/withdraw' => 'customers#withdraw'
     end
-    resources :posts, only: [:index, :show, :edit, :update, :destroy] do
+    resources :posts, only: [:index, :show, :update, :destroy] do
       resources :post_comments, only: [:destroy]
     end
+    resources :searches, only: [:index]
+    get "search" => "searches#search"
   end
-  
+
   root to: 'public/homes#top'
-  
+
   namespace :public do
     resources :customers, only: [:index, :show, :edit, :update] do
       get '/customers/unsubscribe' => 'customers#unsubscribe'
@@ -33,6 +35,7 @@ Rails.application.routes.draw do
       resources :post_comments, only: [:create, :destroy]
     end
     resources :tags, only: [:index, :show]
+    resources :searches, only: [:index]
+    get "search" => "searches#search"
   end
-
 end

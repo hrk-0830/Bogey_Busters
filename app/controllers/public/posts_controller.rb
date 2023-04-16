@@ -8,7 +8,7 @@ class Public::PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.customer_id = current_customer.id
-    if @post.save!
+    if @post.save
       # タグの保存
       @post.save_tags(params[:post][:tag])
       redirect_to public_post_path(@post.id)
@@ -39,6 +39,7 @@ class Public::PostsController < ApplicationController
       @post.save_tags(params[:post][:tag])
       # 成功したら投稿記事へリダイレクト
       redirect_to public_post_path(@post)
+      flash[:notice] = "編集に成功しました"
     else
       flash[:danger] = "必要情報を入力してください"
       redirect_to edit_public_post_path(@post)
@@ -49,6 +50,7 @@ class Public::PostsController < ApplicationController
     @post = Post.find(params[:id])
     @post.destroy
     redirect_to public_posts_path
+    flash[:notice] = "削除に成功しました"
   end
 
 

@@ -1,0 +1,50 @@
+<div class ="container">
+  <div class ="row">
+      <% if @range =="ユーザー名"%>
+        <h2>検索結果</h2>
+          <div class="col-md-12">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>プロフィール画像</th>
+                  <th>名前</th>
+                  <th></th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <% if @customers.any? %>
+                  <% @customers.each do |customer| %>
+                    <tr>
+                      <td>
+                        <% if customer.profile_image.attached? %>
+                          <%= image_tag customer.get_profile_image, size: '50x50' %>
+                        <% else %>
+                          <%= image_tag 'no_image.jpg', size: '50x50' %>
+                        <% end %>
+                      </td>
+                      <td><%= customer.name %></td>
+                      <td>
+                        <% if customer.is_deleted == false %>
+                          有効
+                        <% else %>
+                          退会
+                        <% end %>
+                      </td>
+                      <td><%= link_to "ユーザー詳細", admin_customer_path(customer), class: "btn btn-primary" %></td>
+                    </tr>
+                  <% end %>
+                <% else %>
+                  <tr>
+                    <td colspan="3">ユーザーがいません</td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+      <% else %>
+        <h2>検索結果</h2>
+        <%= render 'layouts/admin_reviews', posts: @posts %>
+      <% end %>
+  </div>
+</div>

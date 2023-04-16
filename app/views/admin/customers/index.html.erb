@@ -7,20 +7,34 @@
             <th>プロフィール画像</th>
             <th>名前</th>
             <th></th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
-          <% if @customers.present? %>
+          <% if @customers.any? %>
             <% @customers.each do |customer| %>
               <tr>
-                <td><%= image_tag customer.get_profile_image, size: '50x50' %></td>
+                <td>
+                  <% if customer.profile_image.attached? %>
+                    <%= image_tag customer.get_profile_image, size: '50x50' %>
+                  <% else %>
+                    <%= image_tag 'no_image.jpg', size: '50x50' %>
+                  <% end %>
+                </td>
                 <td><%= customer.name %></td>
+                <td>
+                  <% if customer.is_deleted == false %>
+                    有効
+                  <% else %>
+                    退会
+                  <% end %>
+                </td>
                 <td><%= link_to "ユーザー詳細", admin_customer_path(customer), class: "btn btn-primary" %></td>
               </tr>
             <% end %>
           <% else %>
             <tr>
-              <td colspan="2">ユーザーがいません</td>
+              <td colspan="3">ユーザーがいません</td>
             </tr>
           <% end %>
         </tbody>

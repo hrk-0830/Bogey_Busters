@@ -41,23 +41,9 @@
           </tr>
         </table>
 
-        <% if @customer != current_customer %>
-          <% if @customer.is_followed_by?(current_customer) %>
-            <%= link_to public_customer_relationships_path(@customer), method: :delete do %>
-              <button class ="btn btn-danger">フォロー解除</button>
-            <% end %>
-          <% else %>
-            <%= link_to public_customer_relationships_path(@customer), method: :post do %>
-              <button class ="btn btn-primary">フォロー</button>
-            <% end %>
-          <% end %>
-        <% end %>
-
-        <% if @customer == current_customer %>
-          <%= link_to edit_public_customer_path(current_customer.id), class: "btn btn-outline-secondary btn-block edit_customer_#{@customer.id}" do %>
+          <%= link_to edit_admin_customer_path(@customer), class: "btn btn-outline-secondary btn-block edit_customer_#{@customer.id}" do %>
             <i class="fas fa-user-cog"></i>
           <% end %>
-        <% end %>
 
 
         <table class ="table">
@@ -70,16 +56,16 @@
     </div>
 
     <div class="col-md-8 mb-4">
+      <h3><%= @customer.name %>の口コミ一覧</h3>
       <div class="row row-cols-1 row-cols-md-3 g-4">
-        <h3><%= @customer.name %>の口コミ一覧</h3>
         <% @post.each do |post| %>
-          <div class="col">
-            <div class="card">
-              <%= link_to public_post_path(post) do %>
+          <div class="col mb-4">
+            <div class="card h-100">
+              <%= link_to admin_post_path(post) do %>
                 <% if post.image.attached? %>
-                  <%= image_tag post.image, size: "100x150" %>
+                  <%= image_tag post.image, class: "card-img-top" %>
                 <% else %>
-                  <%= image_tag 'no_image.jpg', size: "100x150" %>
+                  <%= image_tag 'no_image.jpg', class: "card-img-top" %>
                 <% end %>
               <% end %>
               <div class="card-body">

@@ -14,6 +14,20 @@ class Post < ApplicationRecord
   validates :review, presence: true
   validates :star, presence: true
 
+  def self.looks(search, word)
+    if search == "perfect_match"
+      @post = Post.where("golf_course LIKE?","#{word}")
+    elsif search == "forward_match"
+      @post = Post.where("golf_course LIKE?","#{word}%")
+    elsif search == "backward_match"
+      @post = Post.where("golf_course LIKE?","%#{word}")
+    elsif search == "partial_match"
+      @post = Post.where("golf_course LIKE?","%#{word}%")
+    else
+      @post = Post.all
+    end
+  end
+
   def favorited?(customer)
    favorites.exists?(customer_id: customer.id)
   end

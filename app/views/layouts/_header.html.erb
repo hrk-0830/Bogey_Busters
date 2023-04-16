@@ -1,5 +1,5 @@
 <header>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-info mb-md-4">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-info">
     <div class="container">
       <a class="navbar-brand" href="/"><span>Bogey Busters</span></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -7,52 +7,66 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav ml-auto">
-        <% if customer_signed_in? %>
-          <li>
-            <%= link_to root_path, class: 'nav-link text-light' do %>
-              <i class="fas fa-user"></i> Home
-            <% end %>
-          </li>
-          <li>
-            <%=  link_to public_posts_path, class: 'nav-link text-light' do %>
-              <i class="fas fa-items"></i> 口コミ一覧
-            <% end %>
-          </li>
-          <li>
-            <%=  link_to public_customer_path(current_customer.id), class: 'nav-link text-light' do %>
-              <i class="fas fa-cart-open"></i> マイページ
-            <% end %>
-          </li>
-          <li>
-             <%= link_to destroy_customer_session_path, method: :delete, class: 'nav-link text-light' do %>
-              <i class="fas fa-sign-out-alt"></i> ログアウト
-            <% end %>
-          </li>
-        <% else %>
-          <li>
-            <%= link_to root_path, class: 'nav-link text-light' do %>
-              <i class="fas fa-link"></i> Home
-            <% end %>
-          </li>
-          <li>
-            <%= link_to public_posts_path, class: 'nav-link text-light' do %>
-              <i class="fas fa-home"></i> 口コミ一覧
-            <% end %>
-          </li>
-          <li>
-            <%= link_to new_customer_registration_path, class: 'nav-link text-light' do %>
-              <i class="fas fa-user-plus"></i> 新規登録
-            <% end %>
-          </li>
-          <li>
-            <%= link_to new_customer_session_path, class: 'nav-link text-light' do %>
-              <i class="fas fa-sign-in-alt"></i> ログイン
-            <% end %>
-          </li>
-        <% end %>
+          <% if customer_signed_in? %>
+            <li class="nav-item">
+              <%= link_to root_path, class: 'nav-link text-light' do %>
+                <i class="fas fa-home"></i> Home
+              <% end %>
+            </li>
+            <li class="nav-item">
+              <%=  link_to public_posts_path, class: 'nav-link text-light' do %>
+                <i class="fas fa-comments"></i> 口コミ一覧
+              <% end %>
+            </li>
+            <li class="nav-item">
+              <%=  link_to public_customer_path(current_customer.id), class: 'nav-link text-light' do %>
+                <i class="fas fa-user-circle"></i> マイページ
+              <% end %>
+            </li>
+            <li class="nav-item">
+              <%= link_to destroy_customer_session_path, method: :delete, class: 'nav-link text-light' do %>
+                <i class="fas fa-sign-out-alt"></i> ログアウト
+              <% end %>
+            </li>
+          <% else %>
+            <li class="nav-item">
+              <%= link_to root_path, class: 'nav-link text-light' do %>
+                <i class="fas fa-home"></i> Home
+              <% end %>
+            </li>
+            <li class="nav-item">
+              <%= link_to new_customer_registration_path, class: 'nav-link text-light' do %>
+                <i class="fas fa-user-plus"></i> 新規登録
+              <% end %>
+            </li>
+            <li class="nav-item">
+              <%= link_to new_customer_session_path, class: 'nav-link text-light' do %>
+                <i class="fas fa-sign-in-alt"></i> ログイン
+              <% end %>
+            </li>
+          <% end %>
         </ul>
       </div>
     </div>
+    <% if customer_signed_in? %>
+        <div class="search_form ml-auto">
+          <%= form_with(url: public_search_path, method: :get, local: true) do |f| %>
+            <%= f.text_field :word, class: "form-control mr-sm-2" %>
+            <%= f.select :range, options_for_select([['コース名'], ['ユーザー名']], {class: "form-control mr-sm-2"}) %>
+            <%= f.select :search, options_for_select([["完全一致","perfect_match"], ["前方一致","forward_match"],  ["後方一致","backward_match"], ["部分一致","partial_match"]], {class: "form-control mr-sm-2"}) %>
+            <%= f.submit "検索", class: "btn btn-outline-light my-2 my-sm-0" %>
+          <% end %>
+        </div>
+      <% end %>
   </nav>
-
+  <% if flash[:notice] %>
+    <div class="alert alert-success" role="alert">
+      <%= flash[:notice] %>
+    </div>
+  <% end %>
+  <% if flash[:danger] %>
+    <div class="alert alert-danger" role="alert">
+      <%= flash[:danger] %>
+    </div>
+  <% end %>
 </header>

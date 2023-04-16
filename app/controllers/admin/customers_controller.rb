@@ -1,17 +1,19 @@
 class Admin::CustomersController < ApplicationController
+  before_action :authenticate_admin!
+
   def show
     @customer = Customer.find(params[:id])
     @post = @customer.posts
   end
 
   def edit
-    @customer = current_customer
+    @customer = Customer.find(params[:id])
   end
 
   def index
-     @customer = Customer.all
+     @customers = Customer.all
   end
-  
+
   def unsubscribe
   end
   # 退会処理（ステータス更新）
