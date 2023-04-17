@@ -3,24 +3,42 @@
 
     <div class="col-md-4">
       <div class="m-5">
-        <p>
-          Bogey Bustersへようこそ<br>
-          お気に入りのコースを見つけて<br>
-          ベストスコアを目指しましょう
-        </p>
+        <h5>Bogey Bustersへようこそ</h5>
+          <p class ="my-5">
+            お気に入りのコースを見つけて </br>
+            ベストスコアを目指しましょう
+          </p>
       </div>
     </div>
 
-    <div class="col-md-8 mb-4">
+    <div class="col-md-8 mb-4 my-5">
       <div class="row row-cols-1 row-cols-md-3 g-4">
-        <% @posts.take(12).each do |post| %>
+        <% @posts.take(6).each do |post| %>
           <div class="col">
-            <div class="card">
-              <%= link_to public_post_path(post) do %>
-                <% if post.image.attached? %>
-                  <%= image_tag post.image, size: "100x150" %>
-                <% else %>
-                  <%= image_tag 'no_image.jpg', size: "100x150" %>
+            <div class="card my-3">
+              <% if customer_signed_in? %>
+                <%= link_to public_post_path(post) do %>
+                  <% if post.image.attached? %>
+                    <%= image_tag post.image, size: "100x150" %>
+                  <% else %>
+                    <%= image_tag 'no_image.jpg', size: "100x150" %>
+                  <% end %>
+                <% end %>
+              <% elsif admin_signed_in? %>
+                <%= link_to admin_post_path(post) do %>
+                  <% if post.image.attached? %>
+                    <%= image_tag post.image, size: "100x150" %>
+                  <% else %>
+                    <%= image_tag 'no_image.jpg', size: "100x150" %>
+                  <% end %>
+                <% end %>
+              <% else %>
+                <%= link_to public_post_path(post) do %>
+                  <% if post.image.attached? %>
+                    <%= image_tag post.image, size: "100x150" %>
+                  <% else %>
+                    <%= image_tag 'no_image.jpg', size: "100x150" %>
+                  <% end %>
                 <% end %>
               <% end %>
               <div class="card-body">

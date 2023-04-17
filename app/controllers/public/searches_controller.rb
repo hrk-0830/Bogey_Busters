@@ -13,7 +13,7 @@ class Public::SearchesController < ApplicationController
       @word = params[:word]
       @search = params[:search]
     end
-    redirect_to admin_searches_path
+    render :index
   end
 
   def index
@@ -21,12 +21,9 @@ class Public::SearchesController < ApplicationController
 
     if @range == "ユーザー名"
       @customers = Customer.looks(params[:search], params[:word])
-      @search = params[:search]
-      @word = params[:word]
-    else
       @posts = Post.looks(params[:search], params[:word])
-      @search = params[:search]
-      @word = params[:word]
     end
   end
+
+  
 end

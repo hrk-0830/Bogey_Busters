@@ -34,6 +34,7 @@ Rails.application.routes.draw do
       resource :favorites, only: [:create, :destroy]
       resources :post_comments, only: [:create, :destroy]
     end
+    get "search_prefecture" => "posts#search_prefecture", as: "search_prefecture"
     resources :tags, only: [:index, :show]
     resources :searches, only: [:index]
     get "search" => "searches#search"

@@ -58,4 +58,4 @@ gem 'devise'
 gem "enum_help"
 gem 'rails-i18n'
 gem 'kaminari'
-gem 'jquery-rails'
+gem 'bootstrap4-kaminari-views'

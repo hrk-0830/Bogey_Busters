@@ -1,6 +1,6 @@
 class Public::PostsController < ApplicationController
   before_action :authenticate_customer!
-
+  
   def new
     @post = Post.new
   end
@@ -30,6 +30,11 @@ class Public::PostsController < ApplicationController
 
   def edit
     @post = Post.find(params[:id])
+  end
+  
+  def search_prefecture
+    @prefecture = params[:prefecture_status]
+    @posts = Post.where(prefecture: @prefecture)
   end
 
   def update

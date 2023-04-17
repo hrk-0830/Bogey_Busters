@@ -1,13 +1,19 @@
-<div class="container">
-  <div class="row my-5">
+<div class="container my-5">
+  <h5>
+    <%= link_to public_customer_path(@post.customer.id) do %>
+      <%= @post.customer.name %>
+    <% end %>
+    のレビュー
+  </h5>
+  <div class="row">
     <div class="col-md-5">
-      <h3><strong><%= @post.golf_course %></strong></h3>
+      <h3 class="my-5"><strong><%= @post.golf_course %></strong></h3>
     </div>
-    <div class="col-md-3"></div>
-    <div class="col-md-2">
-      <h5><%= @post.prefecture_status_i18n %></h5>
+    <div class="col-md-3 my-5"></div>
+    <div class="col-md-2 my-5">
+      <h4><%= @post.prefecture_status_i18n %></h4>
     </div>
-    <div class="col-md-2">
+    <div class="col-md-2 my-5">
       <% if @post.star? %>
         <% for i in 1..@post.star do %>
           <i class="fas fa-star text-warning"></i>
@@ -29,12 +35,11 @@
   </div>
 
   <div class="row my-5">
-    <div class="col-md-2">
+    <div class="col-md-8">
       <h4><strong><%= @post.title %></strong></h4>
     </div>
-    <div class="col-md-8"></div>
-    <div class="col-md-2">
-      <%= @post.difficulty_status_i18n %>
+    <div class="col-md-4">
+      <h4><%= @post.difficulty_status_i18n %></h4>
     </div>
   </div>
 
@@ -45,23 +50,24 @@
     <div class="col-md-4"></div>
   </div>
 
-  <div class ="row my-5">
-    <div class ="favorite-btn col-md-3">
+  <div class="row my-5">
+    <div class="col-md-3">
       <%= render "public/favorites/btn", post: @post %>
     </div>
-    <div class ="col-md-9"></div>
+    <div class="col-md-9"></div>
   </div>
 
-  <div class ="row my-5">
-    <div class ="col-md-6">
+  <div class="row my-5">
+    <div class="col-md-6">
       <%= render "public/post_comments/form", post: @post, post_comment: @post_comment %>
     </div>
-    <div class ="col-md-4">
+    <div class="col-md-4 my-3">
+      <h5>タグ一覧</h5>
       <% @post.tags.each do |tag| %>
         <%= link_to tag.name, public_tag_path(tag) %>
       <% end %>
     </div>
-    <div class ="col-md-2">
+    <div class="col-md-2 my-5">
       <%= link_to "編集する", edit_public_post_path(@post), class: "btn btn-primary" %>
     </div>
   </div>

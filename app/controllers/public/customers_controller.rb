@@ -3,7 +3,7 @@ class Public::CustomersController < ApplicationController
 
   def show
     @customer = Customer.find(params[:id])
-    @post = @customer.posts
+    @post = @customer.posts.page(params[:page]).per(6)
   end
 
   def edit
@@ -21,12 +21,12 @@ class Public::CustomersController < ApplicationController
 
   def followings
     @customer = Customer.find(params[:id])
-    @customers = @customer.followings
+    @customers = @customer.followings.page(params[:page])
   end
 
   def followers
     @customer = Customer.find(params[:id])
-    @customers = @customer.followers
+    @customers = @customer.followers.page(params[:page])
   end
 
   def index

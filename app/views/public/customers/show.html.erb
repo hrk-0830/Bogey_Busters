@@ -69,11 +69,11 @@
       </div>
     </div>
 
-    <div class="col-md-8 mb-4">
+    <div class="col-md-8 mb-4 my-5">
+      <h3><%= @customer.name %>の口コミ一覧</h3>
       <div class="row row-cols-1 row-cols-md-3 g-4">
-        <h3><%= @customer.name %>の口コミ一覧</h3>
         <% @post.each do |post| %>
-          <div class="col">
+          <div class="col my-3">
             <div class="card">
               <%= link_to public_post_path(post) do %>
                 <% if post.image.attached? %>
@@ -93,6 +93,7 @@
             </div>
           </div>
         <% end %>
+        <%= paginate @post, theme: 'twitter-bootstrap-4' %>
       </div>
     </div>
 
