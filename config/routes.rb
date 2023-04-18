@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     registrations: 'public/registrations'
   }
 
+
   namespace :admin do
     resources :customers, only: [:index, :show, :edit, :update] do
       get '/customers/unsubscribe' => 'customers#unsubscribe'
@@ -23,6 +24,8 @@ Rails.application.routes.draw do
   root to: 'public/homes#top'
 
   namespace :public do
+    post '/homes/guest_sign_in', to: 'homes#guest_sign_in'
+    post 'users/guest_sign_in', to: 'users/sessions#guest_sign_in'
     resources :customers, only: [:index, :show, :edit, :update] do
       get '/customers/unsubscribe' => 'customers#unsubscribe'
       patch '/customers/withdraw' => 'customers#withdraw'

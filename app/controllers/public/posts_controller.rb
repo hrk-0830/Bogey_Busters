@@ -1,6 +1,6 @@
 class Public::PostsController < ApplicationController
   before_action :authenticate_customer!
-  
+
   def new
     @post = Post.new
   end
@@ -8,19 +8,26 @@ class Public::PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.customer_id = current_customer.id
-    if @post.save
-      # タグの保存
-      @post.save_tags(params[:post][:tag])
-      redirect_to public_post_path(@post.id)
-      flash[:notice] = "投稿に成功しました"
+    if current_customer.email != 'guest@example.com'
+      if @post.save
+        # タグの保存
+        @post.save_tags(params[:post][:tag])
+        redirect_to public_post_path(@post.id)
+        flash[:announce] = "投稿に成功しました"
+      else
+        flash[:danger] = "必要情報を入力してください"
+        redirect_to new_public_post_path
+      end
     else
-      flash[:danger] = "必要情報を入力してください"
-      redirect_to new_public_post_path
+      flash[:danger] = "ゲストユーザーは投稿できません"
+      redirect_to root_path
     end
   end
 
   def index
-    @posts = Post.all.page(params[:page]).per(9)
+    @posts = Post.all.page(params[:page])
+    @prefecture_options = Post.prefecture_statuses.keys.map { |key| [Post.prefecture_statuses_i18n[key], key] }
+    @prefecture = params[:prefecture_status]
   end
 
   def show
@@ -31,10 +38,11 @@ class Public::PostsController < ApplicationController
   def edit
     @post = Post.find(params[:id])
   end
-  
+
   def search_prefecture
+    @prefecture_options = Post.prefecture_statuses.keys.map { |key| [Post.prefecture_statuses_i18n[key], key] }
     @prefecture = params[:prefecture_status]
-    @posts = Post.where(prefecture: @prefecture)
+    @posts = Post.where(prefecture_status: @prefecture).page(params[:page]).per(9)
   end
 
   def update
@@ -44,7 +52,7 @@ class Public::PostsController < ApplicationController
       @post.save_tags(params[:post][:tag])
       # 成功したら投稿記事へリダイレクト
       redirect_to public_post_path(@post)
-      flash[:notice] = "編集に成功しました"
+      flash[:announce] = "編集に成功しました"
     else
       flash[:danger] = "必要情報を入力してください"
       redirect_to edit_public_post_path(@post)
@@ -55,7 +63,7 @@ class Public::PostsController < ApplicationController
     @post = Post.find(params[:id])
     @post.destroy
     redirect_to public_posts_path
-    flash[:notice] = "削除に成功しました"
+    flash[:announce] = "削除に成功しました"
   end
 
 

@@ -1,15 +1,24 @@
 <div class="container">
   <div class="row">
 
-    <div class="col-md-4">
+    <div class="col-md-4 my-5">
       <div class="m-5">
-        <h5>Bogey Bustersへようこそ</h5>
-          <p class ="my-5">
-            お気に入りのコースを見つけて </br>
-            ベストスコアを目指しましょう
-          </p>
+        <h3>Bogey Busters</h3>
+        <h5>へようこそ</h5>
+        <p class="my-5">
+          お気に入りのコースを見つけて<br>
+          ベストスコアを目指しましょう
+        </p>
       </div>
+      <% unless current_customer %>
+      <% unless admin_signed_in? %>
+      <div class="my-5">
+        <%= link_to 'ゲストログイン', public_homes_guest_sign_in_path, method: :post, class: "btn btn-primary" %>
+      </div>
+      <% end %>
+      <% end %>
     </div>
+
 
     <div class="col-md-8 mb-4 my-5">
       <div class="row row-cols-1 row-cols-md-3 g-4">
@@ -19,25 +28,25 @@
               <% if customer_signed_in? %>
                 <%= link_to public_post_path(post) do %>
                   <% if post.image.attached? %>
-                    <%= image_tag post.image, size: "100x150" %>
+                    <%= image_tag post.image, class: "card-img-top img-fluid" %>
                   <% else %>
-                    <%= image_tag 'no_image.jpg', size: "100x150" %>
+                    <%= image_tag 'no_image.jpg', class: "card-img-top img-fluid" %>
                   <% end %>
                 <% end %>
               <% elsif admin_signed_in? %>
                 <%= link_to admin_post_path(post) do %>
                   <% if post.image.attached? %>
-                    <%= image_tag post.image, size: "100x150" %>
+                    <%= image_tag post.image, class: "card-img-top img-fluid" %>
                   <% else %>
-                    <%= image_tag 'no_image.jpg', size: "100x150" %>
+                    <%= image_tag 'no_image.jpg', class: "card-img-top img-fluid" %>
                   <% end %>
                 <% end %>
               <% else %>
                 <%= link_to public_post_path(post) do %>
                   <% if post.image.attached? %>
-                    <%= image_tag post.image, size: "100x150" %>
+                    <%= image_tag post.image, class: "card-img-top img-fluid" %>
                   <% else %>
-                    <%= image_tag 'no_image.jpg', size: "100x150" %>
+                    <%= image_tag 'no_image.jpg', class: "card-img-top img-fluid" %>
                   <% end %>
                 <% end %>
               <% end %>

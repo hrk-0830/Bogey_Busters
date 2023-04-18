@@ -3,7 +3,7 @@ class Admin::CustomersController < ApplicationController
 
   def show
     @customer = Customer.find(params[:id])
-    @post = @customer.posts
+    @post = @customer.posts.page(params[:page])
   end
 
   def edit
@@ -11,7 +11,7 @@ class Admin::CustomersController < ApplicationController
   end
 
   def index
-     @customers = Customer.all
+     @customers = Customer.all.page(params[:page])
   end
 
   def unsubscribe
@@ -19,9 +19,13 @@ class Admin::CustomersController < ApplicationController
   # 退会処理（ステータス更新）
   def withdraw
     @customer = current_customer
-    @customer.update(is_deleted: true)
-    reset_session
-    redirect_to admin_customers_path
+    if @customer.nil?
+      redirect_to root_path, announce: 'このユーザーは退会済みです。'
+    else
+      @customer.update(is_deleted: true)
+      reset_session
+      redirect_to root_path, announce: '退会手続きが完了しました。'
+    end
   end
 
 

@@ -63,9 +63,9 @@
             <div class="card h-100">
               <%= link_to admin_post_path(post) do %>
                 <% if post.image.attached? %>
-                  <%= image_tag post.image, class: "card-img-top" %>
+                  <%= image_tag post.image, class: "card-img-top img-fluid" %>
                 <% else %>
-                  <%= image_tag 'no_image.jpg', class: "card-img-top" %>
+                  <%= image_tag 'no_image.jpg', class: "card-img-top img-fluid" %>
                 <% end %>
               <% end %>
               <div class="card-body">
@@ -79,8 +79,8 @@
             </div>
           </div>
         <% end %>
+        <%= paginate @post, theme: 'twitter-bootstrap-4' %>
       </div>
     </div>
-
   </div>
 </div>

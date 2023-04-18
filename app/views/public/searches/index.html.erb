@@ -34,6 +34,7 @@
                       <td><%= link_to "ユーザー詳細", admin_customer_path(customer), class: "btn btn-primary" %></td>
                     </tr>
                   <% end %>
+                  <%= paginate @customers, theme: 'twitter-bootstrap-4' %>
                 <% else %>
                   <tr>
                     <td colspan="3">ユーザーがいません</td>
@@ -45,6 +46,7 @@
       <% else %>
         <h2>検索結果</h2>
         <%= render 'layouts/reviews', posts: @posts %>
+        <%= paginate @posts, theme: 'twitter-bootstrap-4' %>
       <% end %>
   </div>
 </div>

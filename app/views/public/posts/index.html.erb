@@ -5,11 +5,9 @@
     </div>
     <div class ="col-md-4">
       <%= form_tag public_search_prefecture_path, method: :get do %>
-        <%= select_tag :prefecture_status, options_for_select(prefecture_status_i18n), prompt: "都道府県を選択してください" %>
+        <%= select_tag :prefecture_status, options_for_select(@prefecture_options, @prefecture), prompt: "都道府県を選択してください" %>
         <%= submit_tag "検索" %>
       <% end %>
-
-
     </div>
     <div class ="col-md-4">
     </div>

@@ -8,7 +8,7 @@
             <% if @customer.profile_image.attached? %>
               <%= image_tag @customer.get_profile_image, size:'100x100' %>
             <% else %>
-              <%= image_tag 'no_image.jpg', size: "100x100" %>
+              <%= image_tag 'icon_image.png', size: "100x100" %>
             <% end %>
           </tr>
           <tr>
@@ -77,9 +77,9 @@
             <div class="card">
               <%= link_to public_post_path(post) do %>
                 <% if post.image.attached? %>
-                  <%= image_tag post.image, size: "100x150" %>
+                  <%= image_tag post.image, class: "card-img-top img-fluid" %>
                 <% else %>
-                  <%= image_tag 'no_image.jpg', size: "100x150" %>
+                  <%= image_tag 'no_image.jpg', class: "card-img-top img-fluid" %>
                 <% end %>
               <% end %>
               <div class="card-body">
