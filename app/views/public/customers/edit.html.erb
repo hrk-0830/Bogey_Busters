@@ -40,7 +40,9 @@
 
         <div class="form-group">
           <%= f.submit "編集する", class: "btn btn-primary btn-block" %>
-          <%= link_to "退会する", public_customer_customers_unsubscribe_path(@customer.id), class: 'btn btn-block btn-danger' %>
+          <% if current_customer.email != 'guest@example.com' %>
+            <%= link_to "退会する", public_customer_customers_unsubscribe_path(@customer.id), class: 'btn btn-block btn-danger' %>
+          <% end %>
         </div>
       <% end %>
     </div>

@@ -22,16 +22,15 @@
     </div>
   </div>
 
-  <div class="row my-5">
-    <div class="col-md-1"></div>
+  <div class="row">
     <div class="col-md-10">
       <% if @post.image.attached? %>
-        <%= image_tag @post.image, size: "800x400" %>
+        <%= image_tag @post.image, size: "1000x600" %>
       <% else %>
-        <%= image_tag 'no_image.jpg', size: "800x400" %>
+        <%= image_tag 'no_image.jpg', size: "1000x600" %>
       <% end %>
     </div>
-    <div class="col-md-1"></div>
+    <div class="col-md-2"></div>
   </div>
 
   <div class="row my-5">
@@ -59,7 +58,9 @@
 
   <div class="row my-5">
     <div class="col-md-6">
-      <%= render "public/post_comments/form", post: @post, post_comment: @post_comment %>
+      <div id ="comments_area">
+        <%= render "public/post_comments/form", post: @post, post_comment: @post_comment %>
+      </div>
     </div>
     <div class="col-md-4 my-3">
       <h5>タグ一覧</h5>
@@ -67,9 +68,11 @@
         <%= link_to tag.name, public_tag_path(tag) %>
       <% end %>
     </div>
-    <div class="col-md-2 my-5">
-      <%= link_to "編集する", edit_public_post_path(@post), class: "btn btn-primary" %>
-    </div>
+    <% if @post.customer == current_customer %>
+      <div class="col-md-2 my-5">
+        <%= link_to "編集する", edit_public_post_path(@post), class: "btn btn-primary" %>
+      </div>
+    <% end %>
   </div>
 
   <div class ="row my-5">

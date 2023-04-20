@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   devise_for :admins, controllers: {
     sessions: 'admin/sessions',
   }
-  devise_for :customers, controllers: {
+  devise_for :customers, skip: [:passwords], controllers: {
     sessions: 'public/sessions',
     registrations: 'public/registrations'
   }
@@ -38,7 +38,7 @@ Rails.application.routes.draw do
       resources :post_comments, only: [:create, :destroy]
     end
     get "search_prefecture" => "posts#search_prefecture", as: "search_prefecture"
-    resources :tags, only: [:index, :show]
+    resources :tags, only: [:show]
     resources :searches, only: [:index]
     get "search" => "searches#search"
   end

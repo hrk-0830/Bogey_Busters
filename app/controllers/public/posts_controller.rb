@@ -1,5 +1,6 @@
 class Public::PostsController < ApplicationController
   before_action :authenticate_customer!
+  before_action :ensure_correct_customer, only: [:edit, :update]
 
   def new
     @post = Post.new
@@ -71,6 +72,15 @@ class Public::PostsController < ApplicationController
 
   def post_params
     params.require(:post).permit(:golf_course, :title, :prefecture_status, :difficulty_status, :review, :star, :customer_id, :image)
+  end
+
+  def ensure_correct_customer
+    @post = Post.find(params[:id])
+    @customer = @post.customer
+    unless @customer == current_customer
+      flash[:danger] = "他のユーザーの情報は編集できません。"
+      redirect_to public_posts_path
+    end
   end
 
 end

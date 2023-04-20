@@ -1,5 +1,6 @@
 class Public::CustomersController < ApplicationController
   before_action :authenticate_customer!
+  before_action :ensure_correct_customer, only: [:edit, :update, :unsubscribe, :withdraw]
 
 
   def show
@@ -21,7 +22,7 @@ class Public::CustomersController < ApplicationController
         render :edit
       end
     else
-      flash[:danger] = "ゲストユーザーは編集できません"
+      flash[:danger] = "ゲストユーザーの編集できません"
       redirect_to root_path
     end
   end
@@ -36,8 +37,6 @@ class Public::CustomersController < ApplicationController
     @customers = @customer.followers.page(params[:page])
   end
 
-  def index
-  end
 
   def unsubscribe
   end
@@ -59,6 +58,14 @@ class Public::CustomersController < ApplicationController
 
   def customer_params
     params.require(:customer).permit(:name, :introduction, :profile_image, :best_score, :residence_status, :technique_status, :golf_history, :email)
+  end
+
+  def ensure_correct_customer
+    @customer = Customer.find(params[:id])
+    unless @customer == current_customer
+      flash[:danger] = "他のユーザーの情報は編集できません。"
+      redirect_to public_customer_path(current_customer)
+    end
   end
 
 end

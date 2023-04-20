@@ -2,11 +2,16 @@ class Public::PostCommentsController < ApplicationController
 
   def create
     @post = Post.find(params[:post_id])
-    if @customer.email != 'guest@example.com'
+    if current_customer.email != 'guest@example.com'
       @post_comment = current_customer.post_comments.build(post_comment_params)
       @post_comment.post_id = @post.id
-      @post_comment.save
-      redirect_to request.referrer || root_path
+      if @post_comment.save
+        flash[:announce] = "コメントしました"
+        redirect_to request.referrer || root_path
+      else
+        flash[:danger] = "コメントを入力してください"
+        redirect_to request.referrer || root_path
+      end
     else
       flash[:danger] = "ゲストユーザーはコメントできません"
       redirect_to request.referrer || root_path
@@ -17,6 +22,7 @@ class Public::PostCommentsController < ApplicationController
   def destroy
     @post = Post.find(params[:post_id])
     PostComment.find(params[:id]).destroy
+    flash[:announce] = "コメントを削除しました"
     redirect_to request.referrer || root_path
   end
 

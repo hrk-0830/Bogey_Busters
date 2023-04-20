@@ -1,7 +1,8 @@
-<%= form_with(model: [post, post_comment], url: public_post_post_comments_path(post), local: false) do |f| %>
+<%= form_with(model: [post, post_comment], url: public_post_post_comments_path(post), local: false, html: {class: "needs-validation", novalidate: true}) do |f| %>
   <div class="form-group">
-    <%= f.label :comment %>
-    <%= f.text_area :comment, rows:'5',placeholder: "コメントをここに", class: "form-control" %>
+    <%= f.label :comment, class: "form-label" %>
+    <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに", class: "form-control", required: true %>
+    <div class="invalid-feedback">コメントを入力してください</div>
   </div>
   <%= f.submit "送信する", class: "btn btn-lg btn-primary float-right mt-3" %>
 <% end %>

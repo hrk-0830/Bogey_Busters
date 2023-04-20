@@ -1,12 +1,11 @@
 class Public::TagsController < ApplicationController
+  before_action :authenticate_customer!
 
 
-  def index
-    @tags = Tag.all
-  end
 
   def show
     @tag = Tag.find(params[:id])
+    @tag_posts = @tag.posts.page(params[:page]).per(10)
   end
 
 end
