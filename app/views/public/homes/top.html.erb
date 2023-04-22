@@ -2,21 +2,24 @@
   <div class="row">
 
     <div class="col-md-4 my-5">
-      <div class="m-5">
-        <h3>Bogey Busters</h3>
-        <h5>へようこそ</h5>
-        <p class="my-5">
-          お気に入りのコースを見つけて<br>
-          ベストスコアを目指しましょう
-        </p>
+      <div style="position: relative; display:inline-block;">
+        <%= image_tag 'golf.image.png', class: "md-4" %>
+        <div class="m-5">
+          <h3>Bogey Busters</h3>
+          <h5>へようこそ</h5>
+          <p class="my-5">
+            お気に入りのコースを見つけて<br>
+            ベストスコアを目指しましょう
+          </p>
+        </div>
+        <% unless current_customer %>
+        <% unless admin_signed_in? %>
+        <div class="my-5">
+          <%= link_to 'ゲストログイン', public_homes_guest_sign_in_path, method: :post, class: "btn btn-primary" %>
+        </div>
+        <% end %>
+        <% end %>
       </div>
-      <% unless current_customer %>
-      <% unless admin_signed_in? %>
-      <div class="my-5">
-        <%= link_to 'ゲストログイン', public_homes_guest_sign_in_path, method: :post, class: "btn btn-primary" %>
-      </div>
-      <% end %>
-      <% end %>
     </div>
 
 
