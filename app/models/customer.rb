@@ -6,6 +6,10 @@ class Customer < ApplicationRecord
 
   has_one_attached :profile_image
 
+  def get_profile_image
+    (profile_image.attached?) ? profile_image : 'icon_image.png'
+  end
+
   has_many :posts, dependent: :destroy
   has_many :post_comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
@@ -14,7 +18,7 @@ class Customer < ApplicationRecord
 
   has_many :reverse_of_relationships, class_name: 'Relationship', foreign_key: :follower_id
   has_many :followers, through: :reverse_of_relationships, source: :following
-  
+
 
   def self.looks(search, word)
     if search == "perfect_match"

@@ -5,11 +5,7 @@
       <div class="m-5">
         <table class='table'>
           <tr>
-            <% if @customer.profile_image.attached? %>
-              <%= image_tag @customer.get_profile_image, size:'100x100' %>
-            <% else %>
-              <%= image_tag 'icon_image.png', size: "100x100" %>
-            <% end %>
+              <%= image_tag @customer.get_profile_image, size: '100x100' %>
           </tr>
           <tr>
         	  <th>名前</th>
