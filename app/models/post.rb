@@ -1,6 +1,10 @@
 class Post < ApplicationRecord
   has_one_attached :image
 
+  def get_image
+    (image.attached?) ? image : 'no_image.jpg'
+  end
+
   belongs_to :customer
   has_many :tag_lists, dependent: :destroy
   has_many :tags, through: :tag_lists

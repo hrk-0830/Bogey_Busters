@@ -3,11 +3,7 @@
     <div class="card h-100">
       <div class="position-relative">
         <%= link_to admin_post_path(post) do %>
-          <% if post.image.attached? %>
-            <%= image_tag post.image, class: "card-img-top img-fluid" %>
-          <% else %>
-            <%= image_tag 'no_image.jpg', class: "card-img-top img-fluid" %>
-          <% end %>
+          <%= image_tag post.get_image, class: "card-img-top img-fluid" %>
         <% end %>
         <% if post.star? %>
           <div class="position-absolute top-0 start-0">

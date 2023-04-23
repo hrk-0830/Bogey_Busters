@@ -60,5 +60,4 @@ class Customer < ApplicationRecord
        初級者:0, 中級者:1, 上級者:2
      }
 
-  has_one_attached :profile_image
 end

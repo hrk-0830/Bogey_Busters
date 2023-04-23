@@ -31,7 +31,7 @@
                           退会
                         <% end %>
                       </td>
-                      <td><%= link_to "ユーザー詳細", admin_customer_path(customer), class: "btn btn-primary" %></td>
+                      <td><%= link_to "ユーザー詳細", public_customer_path(customer), class: "btn btn-primary" %></td>
                     </tr>
                   <% end %>
                   <%= paginate @customers, theme: 'twitter-bootstrap-4' %>

@@ -18,13 +18,15 @@ class Admin::CustomersController < ApplicationController
   end
   # 退会処理（ステータス更新）
   def withdraw
-    @customer = current_customer
-    if @customer.nil?
-      redirect_to root_path, announce: 'このユーザーは退会済みです。'
+    @customer = Customer.find(params[:id])
+
+    if @customer.is_deleted
+      flash[:danger] = "このユーザーは退会済です"
+      redirect_to root_path
     else
       @customer.update(is_deleted: true)
-      reset_session
-      redirect_to root_path, announce: '退会手続きが完了しました。'
+      flash[:announce] = "退会に成功しました"
+      redirect_to root_path
     end
   end
 

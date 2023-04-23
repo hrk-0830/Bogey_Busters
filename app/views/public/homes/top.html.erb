@@ -27,27 +27,15 @@
             <div class="card my-3">
               <% if customer_signed_in? %>
                 <%= link_to public_post_path(post) do %>
-                  <% if post.image.attached? %>
-                    <%= image_tag post.image, class: "card-img-top img-fluid" %>
-                  <% else %>
-                    <%= image_tag 'no_image.jpg', class: "card-img-top img-fluid" %>
-                  <% end %>
+                    <%= image_tag post.get_image, class: "card-img-top img-fluid" %>
                 <% end %>
               <% elsif admin_signed_in? %>
                 <%= link_to admin_post_path(post) do %>
-                  <% if post.image.attached? %>
-                    <%= image_tag post.image, class: "card-img-top img-fluid" %>
-                  <% else %>
-                    <%= image_tag 'no_image.jpg', class: "card-img-top img-fluid" %>
-                  <% end %>
+                  <%= image_tag post.get_image, class: "card-img-top img-fluid" %>
                 <% end %>
               <% else %>
                 <%= link_to public_post_path(post) do %>
-                  <% if post.image.attached? %>
-                    <%= image_tag post.image, class: "card-img-top img-fluid" %>
-                  <% else %>
-                    <%= image_tag 'no_image.jpg', class: "card-img-top img-fluid" %>
-                  <% end %>
+                  <%= image_tag post.get_image, class: "card-img-top img-fluid" %>
                 <% end %>
               <% end %>
               <div class="card-body">

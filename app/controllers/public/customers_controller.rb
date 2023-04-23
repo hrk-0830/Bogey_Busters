@@ -1,6 +1,6 @@
 class Public::CustomersController < ApplicationController
   before_action :authenticate_customer!
-  before_action :ensure_correct_customer, only: [:edit, :update, :unsubscribe, :withdraw]
+  before_action :ensure_correct_customer, only: [:edit, :update]
 
 
   def show
@@ -39,6 +39,7 @@ class Public::CustomersController < ApplicationController
 
 
   def unsubscribe
+    @customer = current_customer
   end
   # 退会処理（ステータス更新）
   def withdraw

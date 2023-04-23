@@ -10,9 +10,10 @@ Rails.application.routes.draw do
 
 
   namespace :admin do
-    resources :customers, only: [:index, :show, :edit, :update] do
-      get '/customers/unsubscribe' => 'customers#unsubscribe'
-      patch '/customers/withdraw' => 'customers#withdraw'
+    resources :customers, only: [:index, :show, :update] do
+      member do
+        put '/customers/withdraw' => 'customers#withdraw'
+      end
     end
     resources :posts, only: [:index, :show, :update, :destroy] do
       resources :post_comments, only: [:destroy]

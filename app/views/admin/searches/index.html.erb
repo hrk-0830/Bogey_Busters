@@ -17,11 +17,7 @@
                   <% @customers.each do |customer| %>
                     <tr>
                       <td>
-                        <% if customer.profile_image.attached? %>
-                          <%= image_tag customer.get_profile_image, size: '50x50' %>
-                        <% else %>
-                          <%= image_tag 'no_image.jpg', size: '50x50' %>
-                        <% end %>
+                        <%= image_tag customer.get_profile_image, size: '50x50' %>
                       </td>
                       <td><%= customer.name %></td>
                       <td>
