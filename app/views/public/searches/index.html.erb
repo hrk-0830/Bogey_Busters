@@ -24,17 +24,10 @@
                         <% end %>
                       </td>
                       <td><%= customer.name %></td>
-                      <td>
-                        <% if customer.is_deleted == false %>
-                          有効
-                        <% else %>
-                          退会
-                        <% end %>
-                      </td>
+                      <td></td>
                       <td><%= link_to "ユーザー詳細", public_customer_path(customer), class: "btn btn-primary" %></td>
                     </tr>
                   <% end %>
-                  <%= paginate @customers, theme: 'twitter-bootstrap-4' %>
                 <% else %>
                   <tr>
                     <td colspan="3">ユーザーがいません</td>
@@ -43,6 +36,7 @@
               </tbody>
             </table>
           </div>
+          <%= paginate @customers, theme: 'twitter-bootstrap-4' %>
       <% else %>
         <h2>検索結果</h2>
         <%= render 'layouts/reviews', posts: @posts %>
