@@ -19,7 +19,8 @@ class Public::CustomersController < ApplicationController
         flash[:announce] = "編集に成功しました"
         redirect_to public_customer_path(@customer.id)
       else
-        render :edit
+        flash[:danger] = "必要項目を入力してください"
+        redirect_to edit_public_customer_path
       end
     else
       flash[:danger] = "ゲストユーザーの編集できません"
