@@ -19,7 +19,7 @@ class Public::CustomersController < ApplicationController
         flash[:announce] = "編集に成功しました"
         redirect_to public_customer_path(@customer.id)
       else
-        flash[:danger] = "必要項目を入力してください"
+        flash[:danger] = "名前を入力してください"
         redirect_to edit_public_customer_path
       end
     else
@@ -48,6 +48,7 @@ class Public::CustomersController < ApplicationController
     if @customer.email != 'guest@example.com'
       @customer.update(is_deleted: true)
       reset_session
+      flash[:announce] = "退会に成功しました"
       redirect_to root_path
     else
       flash[:danger] = "ゲストユーザーは削除できません"
