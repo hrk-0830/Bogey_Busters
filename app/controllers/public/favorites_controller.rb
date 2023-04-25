@@ -1,10 +1,15 @@
 class Public::FavoritesController < ApplicationController
 
   def create
-    @post = Post.find(params[:post_id])
-    @favorite = current_customer.favorites.new(post_id: @post.id)
-    @favorite.save
-    redirect_to request.referrer || root_path
+    if current_customer.email != 'guest@example.com'
+      @post = Post.find(params[:post_id])
+      @favorite = current_customer.favorites.new(post_id: @post.id)
+      @favorite.save
+      redirect_to request.referrer || root_path
+    else
+      flash[:danger] = "ゲストユーザーはいいねできません"
+      redirect_to request.referrer || root_path
+    end
   end
 
   def destroy
