@@ -9,6 +9,7 @@ class Public::HomesController < ApplicationController
       customer.password = SecureRandom.urlsafe_base64
     end
     sign_in customer
-    redirect_to root_path, announce: 'ゲストユーザーとしてログインしました。'
+    flash[:announce] = "ゲストユーザーとしてログインしました"
+    redirect_to root_path
   end
 end
