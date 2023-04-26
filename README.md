@@ -1,5 +1,5 @@
 # Bogey Busters
-<img width="1451" alt="スクリーンショット" src="2023-04-26 23.10.jpg">
+<img width="1451" alt="スクリーンショット" src="http://3.112.63.85/.png">
 
 * [概要](#概要)
 * [使用している言語フレームワークのバージョン](＃使用している言語フレームワークのバージョン)
@@ -71,21 +71,21 @@ $ bundle install
 
 ### 引用先
 - 画像
- - https://www.photo-ac.com/
+  - https://www.photo-ac.com/
 - ロゴ
- - https://www.shopify.com/jp/tools/logo-maker
+  - https://www.shopify.com/jp/tools/logo-maker
 
 ### ログインについて
 ログインに必要なメールアドレス及びパスワードは下記です。
 - ユーザー1
- - メールアドレス：taro@example.com
- - パスワード：password
+  - メールアドレス：taro@example.com
+  - パスワード：password
 - ユーザー2
- - メールアドレス：hanako@example.com
- - パスワード：password
+  - メールアドレス：hanako@example.com
+  - パスワード：password
 - ユーザー3
- - メールアドレス：jiro@example.com
- - パスワード：password
+  - メールアドレス：jiro@example.com
+  - パスワード：password
 
 
 
