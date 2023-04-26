@@ -42,9 +42,9 @@
         <h2>検索結果</h2>
         <div class="row row-cols-1 row-cols-md-3 g-4">
           <%= render 'layouts/admin_reviews', posts: @posts %>
-          <%= paginate @posts, theme: 'twitter-bootstrap-4' %>
           </div>
         </div>
+        <%= paginate @posts, theme: 'twitter-bootstrap-4' %>
       <% end %>
   </div>
 </div>

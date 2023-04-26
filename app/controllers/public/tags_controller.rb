@@ -5,7 +5,7 @@ class Public::TagsController < ApplicationController
 
   def show
     @tag = Tag.find(params[:id])
-    @tag_posts = @tag.posts.page(params[:page]).per(10)
+    @tag_posts = @tag.posts.page(params[:page]).per(9)
   end
 
 end
