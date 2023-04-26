@@ -1,5 +1,5 @@
 # Bogey Busters
-<!--トップページの画像-->
+<img width="1451" alt="スクリーンショット" src="top_page.png">
 
 * [概要](#概要)
 * [使用している言語フレームワークのバージョン](＃使用している言語フレームワークのバージョン)
@@ -21,7 +21,9 @@
 
 
 ### 使用している言語フレームワークのバージョン
-<!--あとで-->
+- ruby 3.1.2
+- Rails 6.1.7.3
+- Bootstrap v4.5.3
 
 
 ### 機能
@@ -47,4 +49,26 @@
 
 
 ### インストール方法
-<!--あとで-->
+~~~
+$ cd Bogey_Busters
+~~~
+~~~
+$ rails db:migrate
+~~~
+~~~
+$ rails db:seed
+~~~
+~~~
+$ yarn install
+~~~
+~~~
+$ rails active_storage:install
+~~~
+~~~
+$ bundle install
+~~~
+
+### 管理者ページのログインについて
+初期段階での管理者ページのログインに必要なメールアドレス及びパスワードは下記です。
+- メールアドレス：admin@example.com
+- パスワード：adminn
