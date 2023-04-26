@@ -20,9 +20,9 @@ class Public::SearchesController < ApplicationController
     @range = params[:range]
 
     if @range == "ユーザー名"
-      @customers = Customer.looks(params[:search], params[:word])
+      @customers = Customer.looks(params[:search], params[:word]).order(created_at: :desc)
     else
-      @posts = Post.looks(params[:search], params[:word])
+      @posts = Post.looks(params[:search], params[:word]).order(created_at: :desc)
     end
   end
 

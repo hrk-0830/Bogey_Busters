@@ -5,7 +5,7 @@
         <div class="card h-100">
           <div class="card-img-top position-relative">
             <%= link_to public_post_path(post) do %>
-                <%= image_tag post.get_image, class: "card-img-top rounded-3" %>
+              <%= image_tag post.get_image, class: "card-img-top rounded-3" %>
             <% end %>
             <% if post.star? %>
               <div class="position-absolute top-0 start-0">

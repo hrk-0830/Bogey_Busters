@@ -1,5 +1,5 @@
 # Bogey Busters
-<%= image_tag '2023-04-26 23.10.jpg', size: '1451x', alt: 'スクリーンショット' %>
+![2023-04-26 23 10](https://user-images.githubusercontent.com/124126723/234613923-3644160f-dfc8-4b14-aa2a-abc113078bea.jpg)
 
 * [概要](#概要)
 * [使用している言語フレームワークのバージョン](＃使用している言語フレームワークのバージョン)
