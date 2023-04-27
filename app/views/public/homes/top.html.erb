@@ -12,9 +12,9 @@
       </div>
       <% unless current_customer %>
       <% unless admin_signed_in? %>
-      <div class="my-5">
-        <%= link_to 'ゲストログイン', public_homes_guest_sign_in_path, method: :post, class: "btn btn-primary" %>
-      </div>
+        <div class="my-5">
+          <%= link_to 'ゲストログイン', public_homes_guest_sign_in_path, method: :post, class: "btn btn-primary" %>
+        </div>
       <% end %>
       <% end %>
     </div>
