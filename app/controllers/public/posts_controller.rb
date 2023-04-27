@@ -26,7 +26,7 @@ class Public::PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.all.page(params[:page]).order(created_at: :desc)
+    @posts = Post.all.page(params[:page])
     @prefecture_options = Post.prefecture_statuses.keys.map { |key| [Post.prefecture_statuses_i18n[key], key] }
     @prefecture = params[:prefecture_status]
   end

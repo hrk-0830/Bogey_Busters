@@ -1,6 +1,6 @@
 class Public::HomesController < ApplicationController
   def top
-    @posts = Post.all.order(created_at: :desc)
+    @posts = Post.all
   end
 
   def guest_sign_in
