@@ -17,7 +17,7 @@ class Public::PostsController < ApplicationController
         flash[:announce] = "投稿に成功しました"
       else
         flash[:danger] = "必要情報を入力してください"
-        redirect_to new_public_post_path
+        render :new
       end
     else
       flash[:danger] = "ゲストユーザーは投稿できません"
